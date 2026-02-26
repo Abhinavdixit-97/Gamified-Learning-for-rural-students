@@ -1,0 +1,275 @@
+{
+  "nav": {
+    "home": "Home",
+    "problem": "Problem",
+    "solution": "Solution",
+    "technology": "Technology",
+    "method": "Method",
+    "results": "Results",
+    "references": "References + Team",
+    "teacher": "Teacher Hub",
+    "student": "Student Hub"
+  },
+  "home": {
+    "badge": "Child-friendly AI learning",
+    "title": "Gamified Learning for Rural Education",
+    "subtitle": "A playful, offline-first platform that boosts motivation, builds skills, and supports teachers with real-time insights.",
+    "heroCardTitle": "Learning feels like an adventure",
+    "heroCardText": "Students earn stars, unlock badges, and move through levels while learning real skills for life.",
+    "heroPills": ["Offline-first", "AI support", "Community impact"],
+    "ctaPrimary": "Explore the Solution",
+    "ctaSecondary": "See Results",
+    "stats": {
+      "students": "60+ students in pilot",
+      "engagement": "54% → 87% engagement",
+      "scores": "48% → 82% scores"
+    },
+    "impactTitle": "Games for Good Impact",
+    "impactDescription": "Game mechanics are designed for social good, not just fun. Each quest aligns with real community values.",
+    "impactCards": [
+      {
+        "title": "Community Stories",
+        "text": "Local stories and folk themes make lessons relatable and respectful."
+      },
+      {
+        "title": "Real-world Quests",
+        "text": "Mini missions teach practical skills like saving water, hygiene, and teamwork."
+      },
+      {
+        "title": "Positive Habits",
+        "text": "Badges reward kindness, honesty, and collaborative learning."
+      }
+    ],
+    "howTitle": "How the Platform Works",
+    "howCards": [
+      {
+        "title": "Micro-lessons",
+        "text": "Small, focused lessons that fit short study sessions."
+      },
+      {
+        "title": "Offline-first",
+        "text": "Works without internet, syncs when connectivity returns."
+      },
+      {
+        "title": "Teacher dashboard",
+        "text": "Tracks progress and highlights who needs support."
+      }
+    ]
+  },
+  "problem": {
+    "title": "Rural Education Challenges",
+    "lead": "Students face limited resources, infrastructure gaps, and fewer trained teachers. This limits exposure to digital tools and reduces learning outcomes.",
+    "cards": [
+      {
+        "title": "Limited Access",
+        "text": "Low device availability and weak internet reduce learning opportunities."
+      },
+      {
+        "title": "Motivation Drop",
+        "text": "Traditional rote learning leads to low engagement and confidence."
+      },
+      {
+        "title": "Support Gap",
+        "text": "Teachers need tools to track progress and personalize help."
+      }
+    ]
+  },
+  "solution": {
+    "title": "The Gamified Solution",
+    "lead": "A child-friendly, multilingual platform with adaptive learning, rewards, and teacher insights.",
+    "features": [
+      {
+        "title": "Points, badges, levels",
+        "text": "Learners gain rewards for steady progress."
+      },
+      {
+        "title": "Cultural relevance",
+        "text": "Stories and examples reflect local contexts."
+      },
+      {
+        "title": "AI Tutor",
+        "text": "A friendly helper answers doubts and adapts questions."
+      }
+    ],
+    "tutorTitle": "Try the AI Tutor"
+  },
+  "technology": {
+    "title": "Technology Stack",
+    "lead": "Lightweight, mobile-first engineering that works in low-bandwidth settings.",
+    "stack": [
+      {
+        "title": "Mobile-first design",
+        "text": "Optimized for affordable Android devices."
+      },
+      {
+        "title": "Game engines",
+        "text": "Unity or Phaser for interactive learning loops."
+      },
+      {
+        "title": "Adaptive learning",
+        "text": "AI/ML adjusts difficulty based on learner progress."
+      },
+      {
+        "title": "Offline caching",
+        "text": "Local storage + sync for unreliable connectivity."
+      },
+      {
+        "title": "Multimodal content",
+        "text": "Video, quizzes, animations, and AR-ready modules."
+      },
+      {
+        "title": "Analytics",
+        "text": "Cloud dashboards for teachers and researchers."
+      }
+    ]
+  },
+  "method": {
+    "title": "Proposed Work",
+    "lead": "A five-step roadmap from research to field validation.",
+    "steps": [
+      {
+        "title": "Data collection",
+        "text": "Survey teachers, map language needs, and note connectivity limits."
+      },
+      {
+        "title": "Platform architecture",
+        "text": "Curriculum, gamification, and delivery layers are modular."
+      },
+      {
+        "title": "Adaptive personalization",
+        "text": "Difficulty adjusts based on mastery and confidence."
+      },
+      {
+        "title": "Motivation model",
+        "text": "Quests, teamwork, and culturally relevant rewards."
+      },
+      {
+        "title": "Evaluation",
+        "text": "Pre/post testing, engagement metrics, and feedback loops."
+      }
+    ]
+  },
+  "results": {
+    "title": "Results Snapshot",
+    "lead": "Pilot testing showed stronger engagement and improved learning outcomes.",
+    "cards": [
+      {
+        "title": "Engagement",
+        "text": "Participation rose from 54% to 87%."
+      },
+      {
+        "title": "Learning Scores",
+        "text": "Average scores improved from 48% to 82%."
+      },
+      {
+        "title": "Model Accuracy",
+        "text": "Prediction accuracy reached 0.91 with loss at 0.35."
+      }
+    ],
+    "charts": {
+      "engagement": "Student Engagement (6 weeks)",
+      "scores": "Learning Scores (4 weeks)",
+      "accuracy": "Model Accuracy vs Loss"
+    }
+  },
+  "references": {
+    "title": "References + Team",
+    "lead": "Core contributors and supporting research."
+  },
+  "tutor": {
+    "grade": "Class",
+    "subject": "Subject",
+    "diagnostic": "Diagnostic Quiz",
+    "startDiagnostic": "Start Diagnostic",
+    "nextQuestion": "Get Next Question",
+    "askDoubt": "Ask a Doubt",
+    "typeDoubt": "Type your doubt here...",
+    "send": "Send",
+    "level": "AI Level",
+    "points": "Stars",
+    "badges": "Badges",
+    "teacherPanel": "Teacher View",
+    "progress": "Completion",
+    "loading": "Thinking...",
+    "noQuestion": "No question yet. Start the diagnostic first.",
+    "correct": "Correct!",
+    "incorrect": "Try again!",
+    "growthTitle": "Teacher Growth View",
+    "growthNote": "Tracks performance change across recent attempts.",
+    "growthChartTitle": "Accuracy Trend",
+    "attempts": "Attempts",
+    "overallAccuracy": "Overall accuracy",
+    "avgTime": "Average time",
+    "growth": "Growth trend",
+    "noData": "Not enough attempts yet.",
+    "timeUnit": "sec"
+  },
+  "teacher": {
+    "loginTitle": "Teacher Login",
+    "email": "Teacher email",
+    "password": "Password",
+    "login": "Login",
+    "logout": "Logout",
+    "title": "Teacher Hub",
+    "subtitle": "Create chapters by grade, assign them to students, and track growth.",
+    "addStudentTitle": "Add Students",
+    "studentName": "Student name",
+    "studentUsername": "Student username",
+    "studentPin": "Student PIN",
+    "addStudent": "Add student",
+    "noStudents": "No students yet.",
+    "grade": "Grade",
+    "addChapterTitle": "Add Chapter",
+    "chapterTitle": "Chapter title",
+    "chapterSummary": "Short summary",
+    "addQuestionTitle": "Add Questions",
+    "questionText": "Question text",
+    "option": "Option",
+    "correctOption": "Correct option",
+    "addQuestion": "Add question",
+    "saveChapter": "Save chapter",
+    "assignTitle": "Assign Chapter",
+    "selectStudent": "Select student",
+    "selectChapter": "Select chapter",
+    "assign": "Assign",
+    "noAssignments": "No assignments yet.",
+    "analyticsTitle": "Performance Growth",
+    "analyticsNote": "Select a student to view accuracy trend and growth.",
+    "refresh": "Refresh data"
+  },
+  "student": {
+    "loginTitle": "Student Login",
+    "username": "Username",
+    "pin": "PIN",
+    "login": "Login",
+    "logout": "Logout",
+    "title": "Student Hub",
+    "subtitle": "Learn through assigned chapters and track your progress.",
+    "selectStudent": "Select Student",
+    "chooseStudent": "Choose a student",
+    "performanceTitle": "Your Progress",
+    "accuracy": "Accuracy",
+    "completed": "Chapters completed",
+    "stars": "Stars earned",
+    "assignedChapters": "Assigned Chapters",
+    "noAssignments": "No chapters assigned yet.",
+    "startChapter": "Start chapter",
+    "submitAnswer": "Submit answer",
+    "explain": "Explain with AI",
+    "next": "Next question",
+    "correct": "Correct!",
+    "incorrect": "Try again!",
+    "aiTitle": "Ask the AI Tutor",
+    "aiNote": "Type your doubt and get a friendly explanation.",
+    "aiPlaceholder": "Type your doubt here...",
+    "send": "Send",
+    "thinking": "Thinking...",
+    "aiFallback": "Sorry, the AI helper is not available right now.",
+    "warningTitle": "Time for a short break!",
+    "warningText": "You have been using the app for 60 minutes. Please take a 5–10 minute rest.",
+    "warningButton": "I will take a break",
+    "timerTitle": "Healthy Study Timer",
+    "timerNote": "Total learning time today:",
+    "minutes": "minutes"
+  }
+}
