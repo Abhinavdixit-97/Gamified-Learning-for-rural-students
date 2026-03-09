@@ -1,0 +1,110 @@
+{
+  "class": 12,
+  "subjects": [
+    {
+      "name": "Mathematics",
+      "chapters": [
+        {
+          "chapter": "Calculus",
+          "topics": [
+            {
+              "topic": "Differentiation",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Derivative of x^2?","options":["2x","x","x^2","2"],"answer":"2x"},
+                {"type":"mcq","question":"Derivative of sin x?","options":["cos x","sin x","-cos x","-sin x"],"answer":"cos x"},
+                {"type":"fill_blank","question":"Derivative of e^x is ___","answer":"e^x"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Probability",
+          "topics": [
+            {
+              "topic": "Basics of Probability",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Probability of getting a head in a coin toss?","options":["1/2","1/4","1","0"],"answer":"1/2"},
+                {"type":"mcq","question":"Probability of an impossible event?","options":["0","1","1/2","None"],"answer":"0"},
+                {"type":"fill_blank","question":"Probability of sure event = ___","answer":"1"}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "English",
+      "chapters": [
+        {
+          "chapter": "Grammar",
+          "topics": [
+            {
+              "topic": "Clauses",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Independent clause can stand ___?","options":["Alone","With help","Never","Sometimes"],"answer":"Alone"},
+                {"type":"mcq","question":"Dependent clause cannot ___?","options":["Stand alone","Contain subject","Contain verb","Have meaning"],"answer":"Stand alone"},
+                {"type":"fill_blank","question":"A clause has ___ and ___","answer":"Subject and verb"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Vocabulary",
+          "topics": [
+            {
+              "topic": "Idioms & Phrases",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Meaning of 'Bite the bullet'?","options":["Face difficulty","Eat fast","Run","Sleep"],"answer":"Face difficulty"},
+                {"type":"mcq","question":"Meaning of 'Cut corners'?","options":["Do something quickly or cheaply","Cut paper","Skip food","None"],"answer":"Do something quickly or cheaply"},
+                {"type":"fill_blank","question":"Meaning of 'Under the weather' is ___","answer":"Not feeling well"}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Science",
+      "chapters": [
+        {
+          "chapter": "Physics",
+          "topics": [
+            {
+              "topic": "Electrostatics",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Unit of charge?","options":["Coulomb","Newton","Joule","Ampere"],"answer":"Coulomb"},
+                {"type":"mcq","question":"Like charges ___?","options":["Repel","Attract","Neutral","None"],"answer":"Repel"},
+                {"type":"fill_blank","question":"Force between charges: F = k × q1 × q2 / ___²","answer":"r"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Biology",
+          "topics": [
+            {
+              "topic": "Genetics",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"DNA stands for?","options":["Deoxyribonucleic acid","Ribonucleic acid","Dicarboxylic acid","None"],"answer":"Deoxyribonucleic acid"},
+                {"type":"mcq","question":"Genetic material in humans?","options":["DNA","RNA","Protein","Lipid"],"answer":"DNA"},
+                {"type":"fill_blank","question":"Genes are located on ___","answer":"Chromosomes"}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
