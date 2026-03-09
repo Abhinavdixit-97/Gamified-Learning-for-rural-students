@@ -1,0 +1,110 @@
+{
+  "class": 9,
+  "subjects": [
+    {
+      "name": "Mathematics",
+      "chapters": [
+        {
+          "chapter": "Algebra",
+          "topics": [
+            {
+              "topic": "Linear Equations",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Solve for x: 2x + 3 = 11","options":["2","3","4","5"],"answer":"4"},
+                {"type":"mcq","question":"If x - 5 = 10, x = ?","options":["10","15","5","20"],"answer":"15"},
+                {"type":"fill_blank","question":"x + 7 = 12, x = ___","answer":"5"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Geometry",
+          "topics": [
+            {
+              "topic": "Triangles",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Sum of angles in a triangle?","options":["180°","90°","360°","270°"],"answer":"180°"},
+                {"type":"mcq","question":"Right triangle has which angle?","options":["90°","60°","45°","30°"],"answer":"90°"},
+                {"type":"fill_blank","question":"Equilateral triangle all angles = ___°","answer":"60"}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "English",
+      "chapters": [
+        {
+          "chapter": "Grammar",
+          "topics": [
+            {
+              "topic": "Tenses",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"He ___ to school every day.","options":["go","goes","went","going"],"answer":"goes"},
+                {"type":"mcq","question":"I ___ my homework yesterday.","options":["do","did","done","doing"],"answer":"did"},
+                {"type":"fill_blank","question":"She ___ reading a book now.","answer":"is"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Vocabulary",
+          "topics": [
+            {
+              "topic": "Synonyms and Antonyms",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Synonym of 'Big'?","options":["Large","Small","Tiny","Short"],"answer":"Large"},
+                {"type":"mcq","question":"Opposite of 'Happy'?","options":["Sad","Glad","Joyful","Cheerful"],"answer":"Sad"},
+                {"type":"fill_blank","question":"Synonym of 'Fast' is ___","answer":"Quick"}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Science",
+      "chapters": [
+        {
+          "chapter": "Physics",
+          "topics": [
+            {
+              "topic": "Force and Motion",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Force is measured in?","options":["Newton","Meter","Kg","Joule"],"answer":"Newton"},
+                {"type":"mcq","question":"Acceleration is change in?","options":["Velocity","Speed","Distance","Time"],"answer":"Velocity"},
+                {"type":"fill_blank","question":"Motion of objects due to gravity is called ___","answer":"Free fall"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Biology",
+          "topics": [
+            {
+              "topic": "Cell Structure",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Basic unit of life?","options":["Cell","Atom","Molecule","Organ"],"answer":"Cell"},
+                {"type":"mcq","question":"Plant cells have?","options":["Cell wall","Cell membrane","No nucleus","None"],"answer":"Cell wall"},
+                {"type":"fill_blank","question":"Nucleus controls ___ of a cell","answer":"activities"}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
