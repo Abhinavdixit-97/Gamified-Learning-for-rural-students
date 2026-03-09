@@ -1,0 +1,128 @@
+{
+  "class": 5,
+  "subjects": [
+    {
+      "name": "Mathematics",
+      "chapters": [
+        {
+          "chapter": "Large Numbers",
+          "topics": [
+            {
+              "topic": "Place Value",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Place value of 6 in 5642?","options":["6","60","600","6000"],"answer":"600"},
+                {"type":"mcq","question":"Which is the greatest number?","options":["4567","4657","4756","4675"],"answer":"4756"},
+                {"type":"mcq","question":"How many thousands in 5000?","options":["3","4","5","6"],"answer":"5"},
+                {"type":"fill_blank","question":"2000 + 300 = ___","answer":"2300"},
+                {"type":"mcq","question":"Which is the smallest number?","options":["2345","2435","2453","2354"],"answer":"2345"},
+                {"type":"fill_blank","question":"___ is the smallest 5-digit number","answer":"10000"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Fractions",
+          "topics": [
+            {
+              "topic": "Basic Fractions",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Which is half of 10?","options":["4","5","6","7"],"answer":"5"},
+                {"type":"mcq","question":"Which fraction represents half?","options":["1/2","1/3","1/4","2/3"],"answer":"1/2"},
+                {"type":"mcq","question":"Which is greater?","options":["1/2","1/3","1/4","1/5"],"answer":"1/2"},
+                {"type":"mcq","question":"2/4 is equal to?","options":["1/2","1/3","1/4","3/4"],"answer":"1/2"},
+                {"type":"mcq","question":"Which is smallest?","options":["1/2","1/3","1/4","1/5"],"answer":"1/5"},
+                {"type":"fill_blank","question":"1/2 of 8 = ___","answer":"4"}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "English",
+      "chapters": [
+        {
+          "chapter": "Parts of Speech",
+          "topics": [
+            {
+              "topic": "Noun and Verb",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Which word is a noun?","options":["Table","Run","Quick","Jump"],"answer":"Table"},
+                {"type":"mcq","question":"Which word is a verb?","options":["Run","Book","Apple","Chair"],"answer":"Run"},
+                {"type":"mcq","question":"Which word is a place?","options":["Market","Jump","Run","Eat"],"answer":"Market"},
+                {"type":"mcq","question":"Which word is a person?","options":["Doctor","Book","Pen","Table"],"answer":"Doctor"},
+                {"type":"mcq","question":"Which word is an action?","options":["Write","Pen","Chair","Table"],"answer":"Write"},
+                {"type":"mcq","question":"Which word is a thing?","options":["Laptop","Run","Eat","Jump"],"answer":"Laptop"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Synonyms and Antonyms",
+          "topics": [
+            {
+              "topic": "Word Meaning",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Synonym of big?","options":["Large","Tiny","Small","Short"],"answer":"Large"},
+                {"type":"mcq","question":"Opposite of strong?","options":["Weak","Hard","Heavy","Sharp"],"answer":"Weak"},
+                {"type":"mcq","question":"Synonym of quick?","options":["Fast","Slow","Late","Cold"],"answer":"Fast"},
+                {"type":"mcq","question":"Opposite of clean?","options":["Dirty","Nice","Fresh","Bright"],"answer":"Dirty"},
+                {"type":"mcq","question":"Synonym of happy?","options":["Joyful","Sad","Angry","Cold"],"answer":"Joyful"},
+                {"type":"mcq","question":"Opposite of early?","options":["Late","Soon","Quick","Now"],"answer":"Late"}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Science",
+      "chapters": [
+        {
+          "chapter": "Human Body",
+          "topics": [
+            {
+              "topic": "Body Systems",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Which organ pumps blood?","options":["Heart","Brain","Lungs","Kidney"],"answer":"Heart"},
+                {"type":"mcq","question":"Which organ helps us breathe?","options":["Lungs","Heart","Brain","Liver"],"answer":"Lungs"},
+                {"type":"mcq","question":"Which organ controls body?","options":["Brain","Heart","Lungs","Kidney"],"answer":"Brain"},
+                {"type":"mcq","question":"Which organ helps digestion?","options":["Stomach","Heart","Brain","Lungs"],"answer":"Stomach"},
+                {"type":"mcq","question":"Which organ filters blood?","options":["Kidney","Heart","Brain","Lungs"],"answer":"Kidney"},
+                {"type":"mcq","question":"Which part protects brain?","options":["Skull","Hand","Leg","Arm"],"answer":"Skull"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Energy and Force",
+          "topics": [
+            {
+              "topic": "Energy Basics",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Main source of energy on Earth?","options":["Sun","Moon","Wind","Water"],"answer":"Sun"},
+                {"type":"mcq","question":"Which is renewable energy?","options":["Solar","Coal","Petrol","Gas"],"answer":"Solar"},
+                {"type":"mcq","question":"Which energy moves windmills?","options":["Wind","Solar","Coal","Water"],"answer":"Wind"},
+                {"type":"mcq","question":"Which is non-renewable energy?","options":["Coal","Sun","Wind","Water"],"answer":"Coal"},
+                {"type":"mcq","question":"Force helps objects to?","options":["Move","Sleep","Grow","Eat"],"answer":"Move"},
+                {"type":"mcq","question":"Pull and push are types of?","options":["Force","Energy","Light","Heat"],"answer":"Force"}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
