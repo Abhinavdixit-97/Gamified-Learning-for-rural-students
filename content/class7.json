@@ -1,0 +1,128 @@
+{
+  "class": 7,
+  "subjects": [
+    {
+      "name": "Mathematics",
+      "chapters": [
+        {
+          "chapter": "Integers",
+          "topics": [
+            {
+              "topic": "Basic Integer Operations",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Which is a negative integer?","options":["-5","3","0","7"],"answer":"-5"},
+                {"type":"mcq","question":"What is -3 + 5?","options":["2","-2","8","-8"],"answer":"2"},
+                {"type":"mcq","question":"What is 7 - 10?","options":["-3","3","17","-17"],"answer":"-3"},
+                {"type":"mcq","question":"Which number is greater?","options":["-2","-5","-10","-20"],"answer":"-2"},
+                {"type":"mcq","question":"Absolute value of -8?","options":["-8","8","0","16"],"answer":"8"},
+                {"type":"fill_blank","question":"-4 + 9 = ___","answer":"5"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Algebra",
+          "topics": [
+            {
+              "topic": "Basic Algebraic Expressions",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Value of x if x + 3 = 7?","options":["4","3","7","10"],"answer":"4"},
+                {"type":"mcq","question":"Which is a variable?","options":["x","5","+","10"],"answer":"x"},
+                {"type":"mcq","question":"2x when x = 3 equals?","options":["5","6","3","9"],"answer":"6"},
+                {"type":"mcq","question":"x + x = ?","options":["2x","x2","x+x","0"],"answer":"2x"},
+                {"type":"mcq","question":"Value of 3x when x = 2?","options":["6","5","3","9"],"answer":"6"},
+                {"type":"fill_blank","question":"If x = 5 then x + 2 = ___","answer":"7"}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "English",
+      "chapters": [
+        {
+          "chapter": "Grammar",
+          "topics": [
+            {
+              "topic": "Tenses",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"She ___ to school every day.","options":["go","goes","going","gone"],"answer":"goes"},
+                {"type":"mcq","question":"I ___ a movie yesterday.","options":["watch","watched","watching","watches"],"answer":"watched"},
+                {"type":"mcq","question":"They ___ playing football.","options":["is","are","was","be"],"answer":"are"},
+                {"type":"mcq","question":"We ___ dinner now.","options":["eat","ate","are eating","eaten"],"answer":"are eating"},
+                {"type":"mcq","question":"He ___ finished his work.","options":["has","have","had","having"],"answer":"has"},
+                {"type":"mcq","question":"She ___ a song tomorrow.","options":["sing","sang","will sing","sung"],"answer":"will sing"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Vocabulary",
+          "topics": [
+            {
+              "topic": "Word Meanings",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Synonym of large?","options":["Big","Small","Tiny","Short"],"answer":"Big"},
+                {"type":"mcq","question":"Opposite of strong?","options":["Weak","Fast","Tall","Wide"],"answer":"Weak"},
+                {"type":"mcq","question":"Synonym of begin?","options":["Start","Stop","End","Close"],"answer":"Start"},
+                {"type":"mcq","question":"Opposite of hot?","options":["Cold","Warm","Cool","Heat"],"answer":"Cold"},
+                {"type":"mcq","question":"Synonym of smart?","options":["Intelligent","Lazy","Weak","Slow"],"answer":"Intelligent"},
+                {"type":"mcq","question":"Opposite of open?","options":["Close","Start","Begin","Lift"],"answer":"Close"}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Science",
+      "chapters": [
+        {
+          "chapter": "Nutrition in Plants",
+          "topics": [
+            {
+              "topic": "Photosynthesis",
+              "level": 1,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Plants make food using?","options":["Sunlight","Plastic","Metal","Glass"],"answer":"Sunlight"},
+                {"type":"mcq","question":"Green pigment in leaves?","options":["Chlorophyll","Protein","Iron","Calcium"],"answer":"Chlorophyll"},
+                {"type":"mcq","question":"Plants take in which gas?","options":["Carbon dioxide","Oxygen","Nitrogen","Hydrogen"],"answer":"Carbon dioxide"},
+                {"type":"mcq","question":"Plants release which gas?","options":["Oxygen","Carbon dioxide","Nitrogen","Hydrogen"],"answer":"Oxygen"},
+                {"type":"mcq","question":"Food in plants is stored as?","options":["Starch","Sugar","Salt","Protein"],"answer":"Starch"},
+                {"type":"mcq","question":"Photosynthesis happens in?","options":["Leaves","Roots","Stem","Flower"],"answer":"Leaves"}
+              ]
+            }
+          ]
+        },
+        {
+          "chapter": "Heat",
+          "topics": [
+            {
+              "topic": "Temperature and Heat Transfer",
+              "level": 2,
+              "xp_reward": 10,
+              "questions": [
+                {"type":"mcq","question":"Instrument used to measure temperature?","options":["Thermometer","Barometer","Speedometer","Compass"],"answer":"Thermometer"},
+                {"type":"mcq","question":"Heat flows from?","options":["Hot to cold","Cold to hot","Equal","None"],"answer":"Hot to cold"},
+                {"type":"mcq","question":"Unit of temperature?","options":["Celsius","Meter","Gram","Second"],"answer":"Celsius"},
+                {"type":"mcq","question":"Heat transfer through solids?","options":["Conduction","Convection","Radiation","Evaporation"],"answer":"Conduction"},
+                {"type":"mcq","question":"Heat transfer in liquids and gases?","options":["Convection","Conduction","Radiation","Reflection"],"answer":"Convection"},
+                {"type":"mcq","question":"Heat from the Sun reaches Earth by?","options":["Radiation","Conduction","Convection","Friction"],"answer":"Radiation"}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
