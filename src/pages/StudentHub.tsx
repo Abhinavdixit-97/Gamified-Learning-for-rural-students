@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Section from "../components/Section";
@@ -47,6 +48,12 @@ type Attempt = {
 const SESSION_KEY = "rlq_session_seconds";
 const SESSION_DATE_KEY = "rlq_session_date";
 const WARNING_DATE_KEY = "rlq_warning_date";
+const quickDoubts = [
+  "Explain this chapter in easy Hinglish",
+  "Give me 5 important questions",
+  "Make quick revision notes",
+  "Give one real-life example"
+];
 
 const StudentHub = () => {
   const { t, i18n } = useTranslation();
@@ -73,25 +80,36 @@ const StudentHub = () => {
   const [chatLoading, setChatLoading] = useState(false);
   const [sessionSeconds, setSessionSeconds] = useState(0);
   const [showWarning, setShowWarning] = useState(false);
+  const [activeView, setActiveView] = useState<"overview" | "practice" | "ask">("overview");
+  const [dataLoading, setDataLoading] = useState(false);
+  const [dataError, setDataError] = useState("");
 
   const loadStudentData = async () => {
-    const [assignmentData, attemptData] = await Promise.all([
-      fetchStudentAssignments(),
-      fetchStudentAttempts()
-    ]);
-    setAssignments(assignmentData);
-    const normalizedAttempts = attemptData.map((item: any) => ({
-      id: Number(item.id),
-      chapterId: item.chapter_id ? Number(item.chapter_id) : null,
-      subject: item.subject || "",
-      correct: Boolean(item.correct),
-      points: Number(item.points || 0),
-      timeSpentSec: Number(item.time_spent_sec || 0),
-      difficulty: item.difficulty || "",
-      question: item.question || "",
-      timestamp: Number(item.timestamp || 0)
-    }));
-    setAttempts(normalizedAttempts);
+    setDataLoading(true);
+    setDataError("");
+    try {
+      const [assignmentData, attemptData] = await Promise.all([
+        fetchStudentAssignments(),
+        fetchStudentAttempts()
+      ]);
+      setAssignments(assignmentData);
+      const normalizedAttempts = attemptData.map((item: any) => ({
+        id: Number(item.id),
+        chapterId: item.chapter_id ? Number(item.chapter_id) : null,
+        subject: item.subject || "",
+        correct: Boolean(item.correct),
+        points: Number(item.points || 0),
+        timeSpentSec: Number(item.time_spent_sec || 0),
+        difficulty: item.difficulty || "",
+        question: item.question || "",
+        timestamp: Number(item.timestamp || 0)
+      }));
+      setAttempts(normalizedAttempts);
+    } catch (error: any) {
+      setDataError(error.message || "Could not load your learning data.");
+    } finally {
+      setDataLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -168,9 +186,36 @@ const StudentHub = () => {
   }, [attempts, assignedChapters]);
 
   const totalStars = attempts.reduce((sum, attempt) => sum + attempt.points, 0);
+  const totalQuestions = assignedChapters.reduce(
+    (sum, chapter) => sum + chapter.questions.length,
+    0
+  );
+  const answeredAssigned = attempts.filter((attempt) => attempt.chapterId).length;
+  const missionProgress = totalQuestions
+    ? Math.min(100, Math.round((answeredAssigned / totalQuestions) * 100))
+    : 0;
+  const todayKey = new Date().toISOString().slice(0, 10);
+  const todayAttempts = attempts.filter((attempt) => {
+    if (!attempt.timestamp) return false;
+    return new Date(attempt.timestamp).toISOString().slice(0, 10) === todayKey;
+  }).length;
+  const recentAttempts = [...attempts]
+    .sort((a, b) => b.timestamp - a.timestamp)
+    .slice(0, 4);
+
+  const getChapterStats = (chapter: Chapter) => {
+    const chapterAttempts = attempts.filter((attempt) => attempt.chapterId === chapter.id);
+    const answered = Math.min(chapter.questions.length, chapterAttempts.length);
+    const correct = chapterAttempts.filter((attempt) => attempt.correct).length;
+    const progress = chapter.questions.length
+      ? Math.round((answered / chapter.questions.length) * 100)
+      : 0;
+    return { answered, correct, progress };
+  };
 
   const startChapter = (chapter: Chapter) => {
     setActiveChapter(chapter);
+    setActiveView("practice");
     setQuestionIndex(0);
     setSelectedOption(null);
     setFeedback("");
@@ -180,6 +225,10 @@ const StudentHub = () => {
   };
 
   const currentQuestion = activeChapter?.questions[questionIndex];
+  const currentQuestionProgress =
+    activeChapter && activeChapter.questions.length
+      ? Math.round(((questionIndex + (submitted ? 1 : 0)) / activeChapter.questions.length) * 100)
+      : 0;
 
   const submitAnswer = async () => {
     if (!activeChapter || selectedOption === null || !currentQuestion) return;
@@ -293,7 +342,7 @@ const StudentHub = () => {
   const handleLogin = async () => {
     setLoginError("");
     try {
-      const user = await loginStudent(loginUsername, loginPin);
+      const user = await loginStudent(loginUsername.trim(), loginPin.trim());
       setAuthUser(user);
     } catch (error: any) {
       setLoginError(error.message || "Login failed.");
@@ -310,7 +359,20 @@ const StudentHub = () => {
   if (!authUser || authUser.role !== "student") {
     return (
       <Section title={t("student.loginTitle")}>
-        <div className="card form-grid">
+        <div className="student-login-shell">
+          <div>
+            <span className="badge">Student access</span>
+            <h3>Continue your learning quest</h3>
+            <p>
+              Use the username and PIN created by your teacher. Username is not email.
+            </p>
+            <div className="login-hints">
+              <span>Check spelling</span>
+              <span>Use exact PIN</span>
+              <span>Same backend</span>
+            </div>
+          </div>
+          <div className="card form-grid">
           <input
             className="input"
             placeholder={t("student.username")}
@@ -328,6 +390,7 @@ const StudentHub = () => {
           <button className="btn btn-primary" onClick={handleLogin}>
             {t("student.login")}
           </button>
+          </div>
         </div>
       </Section>
     );
@@ -335,111 +398,229 @@ const StudentHub = () => {
 
   return (
     <Section title={t("student.title")}>
-      <p>{t("student.subtitle")}</p>
-      <button className="btn btn-secondary" onClick={handleLogout}>
-        {t("student.logout")}
-      </button>
-
-      <div className="card-grid">
-        <div className="card">
-          <h3>{t("student.performanceTitle")}</h3>
-          <div className="stat-row">
-            <span className="stat-pill">{t("student.accuracy")}: {accuracy}%</span>
-            <span className="stat-pill">{t("student.completed")}: {completedChapters}</span>
-            <span className="stat-pill">{t("student.stars")}: {totalStars}</span>
+      <div className="student-hero">
+        <div>
+          <span className="badge">Welcome, {authUser.name || authUser.username}</span>
+          <h2>Your learning mission</h2>
+          <p>{t("student.subtitle")}</p>
+          <div className="student-actions">
+            <button className="btn btn-primary" onClick={() => setActiveView("practice")}>
+              Start practice
+            </button>
+            <button className="btn btn-secondary" onClick={() => setActiveView("ask")}>
+              Ask AI
+            </button>
+            <button className="ghost-btn" onClick={handleLogout}>
+              {t("student.logout")}
+            </button>
           </div>
         </div>
-        <div className="card">
-          <h3>{t("student.timerTitle")}</h3>
-          <p className="muted">
-            {t("student.timerNote")} {Math.floor(sessionSeconds / 60)} {t("student.minutes")}
-          </p>
+        <div className="mission-ring" style={{ "--progress": `${missionProgress}%` } as CSSProperties}>
+          <strong>{missionProgress}%</strong>
+          <span>Mission progress</span>
         </div>
       </div>
 
-      <OfficialLearningPath user={authUser} onActivitySaved={loadStudentData} />
+      <div className="student-tabs" role="tablist" aria-label="Student dashboard views">
+        {[
+          ["overview", "Overview"],
+          ["practice", "Practice"],
+          ["ask", "AI Doubts"]
+        ].map(([id, label]) => (
+          <button
+            key={id}
+            className={`subject-tab${activeView === id ? " active" : ""}`}
+            onClick={() => setActiveView(id as typeof activeView)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
 
-      <div className="section">
-        <h3>Teacher Assigned Practice</h3>
-        {assignedChapters.length === 0 ? (
-          <p className="muted">{t("student.noAssignments")}</p>
-        ) : (
+      {dataError && <div className="callout">{dataError}</div>}
+      {dataLoading && <p className="muted">Loading your dashboard...</p>}
+
+      {activeView === "overview" && (
+        <>
+          <div className="student-stat-grid">
+            <div className="metric-card">
+              <span>{t("student.accuracy")}</span>
+              <strong>{accuracy}%</strong>
+            </div>
+            <div className="metric-card">
+              <span>{t("student.completed")}</span>
+              <strong>{completedChapters}</strong>
+            </div>
+            <div className="metric-card">
+              <span>{t("student.stars")}</span>
+              <strong>{totalStars}</strong>
+            </div>
+            <div className="metric-card">
+              <span>Today</span>
+              <strong>{todayAttempts}</strong>
+            </div>
+          </div>
+
           <div className="card-grid">
-            {assignedChapters.map((chapter) => (
-              <div className="card" key={chapter.id}>
-                <h4>{chapter.title}</h4>
-                <p className="muted">
-                  G{chapter.grade} - {chapter.subject}
-                </p>
-                <p>{chapter.summary}</p>
-                <button className="btn btn-primary" onClick={() => startChapter(chapter)}>
-                  {t("student.startChapter")}
+            <div className="card">
+              <h3>{t("student.timerTitle")}</h3>
+              <p className="muted">
+                {t("student.timerNote")} {Math.floor(sessionSeconds / 60)} {t("student.minutes")}
+              </p>
+              <div className="progress-bar">
+                <div
+                  className="progress-fill"
+                  style={{ width: `${Math.min(100, Math.round((sessionSeconds / 3600) * 100))}%` }}
+                />
+              </div>
+            </div>
+            <div className="card">
+              <h3>Recent activity</h3>
+              {recentAttempts.length === 0 ? (
+                <p className="muted">Start a quiz to see your activity here.</p>
+              ) : (
+                <div className="activity-list">
+                  {recentAttempts.map((attempt) => (
+                    <div className="activity-item" key={attempt.id}>
+                      <span className={attempt.correct ? "status-dot success" : "status-dot"} />
+                      <p>{attempt.question}</p>
+                      <strong>{attempt.points} stars</strong>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <OfficialLearningPath user={authUser} onActivitySaved={loadStudentData} />
+        </>
+      )}
+
+      {activeView === "practice" && (
+        <>
+          <div className="section">
+            <h3>Teacher Assigned Practice</h3>
+            {assignedChapters.length === 0 ? (
+              <p className="muted">{t("student.noAssignments")}</p>
+            ) : (
+              <div className="chapter-mission-grid">
+                {assignedChapters.map((chapter) => {
+                  const stats = getChapterStats(chapter);
+                  return (
+                    <button
+                      className={`chapter-mission${activeChapter?.id === chapter.id ? " active" : ""}`}
+                      key={chapter.id}
+                      onClick={() => startChapter(chapter)}
+                    >
+                      <span>{chapter.subject} - Class {chapter.grade}</span>
+                      <strong>{chapter.title}</strong>
+                      <p>{chapter.summary || "Practice teacher-assigned questions."}</p>
+                      <div className="progress-bar">
+                        <div className="progress-fill" style={{ width: `${stats.progress}%` }} />
+                      </div>
+                      <small>{stats.answered}/{chapter.questions.length} done - {stats.correct} correct</small>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {activeChapter && currentQuestion && (
+            <div className="quiz-stage">
+              <div className="quiz-stage-header">
+                <div>
+                  <span className="badge">Question {questionIndex + 1} of {activeChapter.questions.length}</span>
+                  <h3>{activeChapter.title}</h3>
+                </div>
+                <strong>{currentQuestionProgress}%</strong>
+              </div>
+              <div className="progress-bar">
+                <div className="progress-fill" style={{ width: `${currentQuestionProgress}%` }} />
+              </div>
+              <p className="quiz-prompt">{currentQuestion.prompt}</p>
+              <div className="quiz-options interactive-options">
+                {currentQuestion.options.map((option, index) => {
+                  const isCorrect = submitted && index === currentQuestion.correctIndex;
+                  const isWrong =
+                    submitted && selectedOption === index && index !== currentQuestion.correctIndex;
+                  return (
+                    <button
+                      key={`${currentQuestion.id}-${index}`}
+                      className={`option-btn${selectedOption === index ? " selected" : ""}${isCorrect ? " correct" : ""}${isWrong ? " wrong" : ""}`}
+                      onClick={() => !submitted && setSelectedOption(index)}
+                    >
+                      <span>{String.fromCharCode(65 + index)}</span>
+                      {option}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="quiz-actions">
+                <button
+                  className="btn btn-secondary"
+                  onClick={explainQuestion}
+                  disabled={explainLoading}
+                >
+                  {explainLoading ? t("student.thinking") : t("student.explain")}
                 </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={submitAnswer}
+                  disabled={selectedOption === null || submitted}
+                >
+                  {t("student.submitAnswer")}
+                </button>
+                <button className="ghost-btn" onClick={nextQuestion} disabled={!submitted}>
+                  {questionIndex + 1 === activeChapter.questions.length ? "Finish" : t("student.next")}
+                </button>
+              </div>
+              {feedback && <div className={`quiz-feedback${feedback === t("student.correct") ? " success" : ""}`}>{feedback}</div>}
+              {explanation && <div className="ai-explanation">{explanation}</div>}
+            </div>
+          )}
+        </>
+      )}
+
+      {activeView === "ask" && (
+        <div className="ai-study-panel">
+          <div>
+            <h3>{t("student.aiTitle")}</h3>
+            <p>{t("student.aiNote")}</p>
+            <div className="quick-doubt-row">
+              {quickDoubts.map((prompt) => (
+                <button className="ghost-btn" key={prompt} onClick={() => setDoubtInput(prompt)}>
+                  {prompt}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="chat-box">
+            {chatLog.length === 0 && <p className="muted">Ask a doubt or tap a quick prompt to begin.</p>}
+            {chatLog.map((item, index) => (
+              <div key={`${item.role}-${index}`} className={`chat-message ${item.role}`}>
+                <div className="chat-bubble">{item.text}</div>
               </div>
             ))}
           </div>
-        )}
-      </div>
-
-      {activeChapter && currentQuestion && (
-        <div className="card">
-          <h3>{activeChapter.title}</h3>
-          <p>{currentQuestion.prompt}</p>
-          <button
-            className="btn btn-secondary"
-            onClick={explainQuestion}
-            disabled={explainLoading}
-          >
-            {explainLoading ? t("student.thinking") : t("student.explain")}
-          </button>
-          {explanation && <p className="muted">{explanation}</p>}
-          <div className="quiz-options">
-            {currentQuestion.options.map((option, index) => (
-              <button
-                key={`${currentQuestion.id}-${index}`}
-                className={`option-btn${selectedOption === index ? " selected" : ""}`}
-                onClick={() => setSelectedOption(index)}
-              >
-                {option}
-              </button>
-            ))}
+          <div className="tutor-controls">
+            <input
+              className="input"
+              value={doubtInput}
+              placeholder={t("student.aiPlaceholder")}
+              onChange={(event) => setDoubtInput(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  sendDoubt();
+                }
+              }}
+            />
+            <button className="btn btn-primary" onClick={sendDoubt} disabled={chatLoading}>
+              {chatLoading ? t("student.thinking") : t("student.send")}
+            </button>
           </div>
-          <button
-            className="btn btn-secondary"
-            onClick={submitAnswer}
-            disabled={selectedOption === null || submitted}
-          >
-            {t("student.submitAnswer")}
-          </button>
-          {feedback && <p className="muted">{feedback}</p>}
-          <button className="btn btn-primary" onClick={nextQuestion} disabled={!submitted}>
-            {t("student.next")}
-          </button>
         </div>
       )}
-
-      <div className="card">
-        <h3>{t("student.aiTitle")}</h3>
-        <p>{t("student.aiNote")}</p>
-        <div className="chat-box">
-          {chatLog.map((item, index) => (
-            <div key={`${item.role}-${index}`} className={`chat-message ${item.role}`}>
-              <div className="chat-bubble">{item.text}</div>
-            </div>
-          ))}
-        </div>
-        <div className="tutor-controls">
-          <input
-            className="input"
-            value={doubtInput}
-            placeholder={t("student.aiPlaceholder")}
-            onChange={(event) => setDoubtInput(event.target.value)}
-          />
-          <button className="btn btn-primary" onClick={sendDoubt} disabled={chatLoading}>
-            {chatLoading ? t("student.thinking") : t("student.send")}
-          </button>
-        </div>
-      </div>
 
       {showWarning && (
         <div className="modal-overlay">
