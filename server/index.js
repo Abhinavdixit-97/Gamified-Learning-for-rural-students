@@ -46,23 +46,32 @@ const safeJsonParse = (text) => {
 
 const buildSystemPrompt = (language, grade, subject, chapter) => {
   const chapterLine = chapter
-    ? `The current chapter is "${chapter}". All explanations, examples, and quiz questions must be strictly based on this chapter only.`
+    ? `The current chapter is "${chapter}". First use the provided video transcript, notes, chapter content, or digest when available.`
     : "";
   return [
-    "You are a friendly AI tutor and mentor for school students in grades 6 to 12.",
-    "Your role is to help students understand concepts clearly before they practice.",
+    "You are an intelligent AI Teaching Assistant integrated into an advanced EdTech platform.",
+    "Your goal is to provide accurate, helpful, and student-friendly answers.",
+    "First try to answer using provided learning context: video transcript, notes, chapter content, or uploaded lecture material.",
+    "If the answer is not found in the provided context, use your general academic knowledge as a fallback.",
+    "If you are still unsure, clearly say: \"I am not fully sure, but here is the best possible explanation...\"",
+    "Always follow this learning flow: Understand First -> Then Practice -> Then Master.",
     "Always follow this learning flow: Understand First → Then Practice → Then Master.",
     `Use ${language} as the response language.`,
     `The student is in Class ${grade}, studying ${subject}.`,
     chapterLine,
     "CONTEXT RULES:",
-    `- Only respond to topics relevant to Class ${grade} ${subject}${chapter ? ` Chapter: ${chapter}` : ""}.`,
-    "- If the student asks about unrelated topics or other classes, politely redirect them back.",
+    `- Give highest priority to Class ${grade} ${subject}${chapter ? ` Chapter: ${chapter}` : ""} context when supplied.`,
+    "- Do not invent facts from missing context. Use general knowledge only when the context does not contain the answer.",
+    "- If a student asks beyond the current chapter, still help academically, but mention when the answer is from general knowledge.",
     "CHAPTER EXPLANATION RULES (when explaining a concept):",
-    "- Use simple, student-friendly language. Avoid complex jargon.",
+    "- Use Hinglish plus simple English unless the requested language says otherwise.",
+    "- Use simple, student-friendly language. Avoid unnecessary complexity.",
     "- Break down concepts step by step.",
     "- Include real-life examples the student can relate to.",
-    "- Structure your explanation as: 1) Introduction 2) Core concept 3) Example 4) Key points summary.",
+    "- Structure your answer with clear bullets: Answer, Explanation, Example if needed, Key points.",
+    "- If the student seems confused, simplify the explanation and give an easy example.",
+    "REVISION AND EXAM PREP:",
+    "- When asked, generate short notes, key formulas, important concepts, important questions, MCQs, and long answers.",
     "QUIZ RULES:",
     "- Only offer a quiz after explaining the concept.",
     "- Ask the student if they are ready before starting the quiz.",
@@ -157,6 +166,24 @@ const buildChapterDigest = (chapterContent) => {
   });
 
   return lines.join("\n");
+};
+
+const buildProvidedLearningContext = ({ chapterTitle, transcript, notes, chapterContent }) => {
+  const sections = [];
+  if (chapterTitle) {
+    sections.push(`Chapter title: ${chapterTitle}`);
+  }
+  if (transcript) {
+    sections.push(`Video transcript:\n${transcript}`);
+  }
+  if (notes) {
+    sections.push(`Notes:\n${notes}`);
+  }
+  if (chapterContent) {
+    sections.push(`Chapter content:\n${buildChapterDigest(chapterContent)}`);
+  }
+
+  return sections.join("\n\n");
 };
 
 const fallbackChapterSummary = (chapterContent) => {
@@ -263,9 +290,14 @@ const buildFallbackChapterQuiz = (chapterContent) => {
 
 const buildGeneralSystemPrompt = (language) => {
   return [
-    "You are a helpful all-purpose AI assistant inside a learning platform.",
-    "Answer general questions clearly, directly, and in a friendly tone.",
-    "You can help with study topics, technology, coding, project ideas, and everyday knowledge.",
+    "You are an intelligent AI Teaching Assistant integrated into an advanced EdTech platform.",
+    "First use any provided learning context such as transcript, notes, chapter title, or chapter content.",
+    "If the answer is not present in the provided context, use correct general knowledge.",
+    "If you are still unsure, clearly say: \"I am not fully sure, but here is the best possible explanation...\"",
+    "Answer academic, technical, coding, project, and everyday knowledge questions clearly.",
+    "Use Hinglish plus simple English unless the requested language says otherwise.",
+    "Use bullets, step-by-step explanation, and examples when helpful.",
+    "Do not hallucinate facts or give random incorrect answers.",
     "If a request is unsafe or harmful, refuse briefly and redirect safely.",
     `Use ${language || "English"} as the response language.`
   ].join(" ");
@@ -964,13 +996,24 @@ app.post("/api/ai/chapter-quiz", async (req, res) => {
 
 app.post("/api/ai/general", async (req, res) => {
   try {
-    const { language, question, history } = req.body || {};
+    const { language, question, history, chapter_title, chapterTitle, transcript, notes } = req.body || {};
     if (!String(question || "").trim()) {
       return res.status(400).json({ error: "Question is required." });
     }
 
     const system = buildGeneralSystemPrompt(language);
     const chatHistory = normalizeHistory(history);
+    const learningContext = buildProvidedLearningContext({
+      chapterTitle: chapterTitle || chapter_title,
+      transcript,
+      notes
+    });
+    const userQuestion = [
+      learningContext ? "Provided learning context:" : "",
+      learningContext,
+      learningContext ? "Student question:" : "",
+      String(question || "").trim()
+    ].filter(Boolean).join("\n\n");
 
     let content;
     if (genAI) {
@@ -980,14 +1023,14 @@ app.post("/api/ai/general", async (req, res) => {
         "",
         historyText,
         "",
-        `user: ${String(question || "").trim()}`
+        `user: ${userQuestion}`
       ].join("\n");
       content = await callGemini(fullPrompt);
     } else if (openai) {
       content = await callOpenAI([
         { role: "system", content: system },
         ...chatHistory,
-        { role: "user", content: String(question || "").trim() }
+        { role: "user", content: userQuestion }
       ]);
     } else {
       throw new Error("No AI API configured. Please set GOOGLE_API_KEY or OPENAI_API_KEY.");
@@ -1007,16 +1050,45 @@ app.post("/api/ai/general", async (req, res) => {
 
 app.post("/api/ai/doubt", async (req, res) => {
   try {
-    const { language, grade, subject, chapter, question, history } = req.body || {};
+    const {
+      language,
+      grade,
+      subject,
+      chapter,
+      question,
+      history,
+      chapter_title,
+      chapterTitle,
+      transcript,
+      notes
+    } = req.body || {};
 
     const system = buildSystemPrompt(language, grade, subject, chapter || "");
     const chatHistory = normalizeHistory(history);
+    let chapterContent = null;
+    try {
+      if (grade && subject && chapter) {
+        chapterContent = await getChapterContent(grade, subject, chapter);
+      }
+    } catch (error) {
+      chapterContent = null;
+    }
+
+    const learningContext = buildProvidedLearningContext({
+      chapterTitle: chapterTitle || chapter_title || chapter,
+      transcript,
+      notes,
+      chapterContent
+    });
 
     const userPrompt = [
+      learningContext ? "Provided learning context:" : "",
+      learningContext,
+      learningContext ? "Use the context first. If the answer is not present, use general knowledge and say so briefly." : "",
       "Solve the student's doubt in a clear, child-friendly way.",
       "Return JSON with keys: answer (string), tips (array), next_steps (array).",
       `Question: ${question}`
-    ].join("\n");
+    ].filter(Boolean).join("\n\n");
 
     let content;
     if (genAI) {

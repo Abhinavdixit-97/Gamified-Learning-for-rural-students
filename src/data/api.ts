@@ -64,6 +64,10 @@ export const requestDoubtSolve = async (payload: {
   chapter?: string;
   question: string;
   history: ChatMessage[];
+  chapterTitle?: string;
+  chapter_title?: string;
+  transcript?: string;
+  notes?: string;
 }) => {
   const response = await fetch(`${API_BASE}/api/ai/doubt`, {
     method: "POST",
@@ -184,6 +188,10 @@ export const requestGeneralAnswer = async (payload: {
   language: string;
   question: string;
   history: ChatMessage[];
+  chapterTitle?: string;
+  chapter_title?: string;
+  transcript?: string;
+  notes?: string;
 }) => {
   const response = await fetch(`${API_BASE}/api/ai/general`, {
     method: "POST",
