@@ -1,7 +1,8 @@
 import { authHeader, saveAuth } from "./auth";
 
 const API_BASE =
-  import.meta.env.VITE_API_BASE || "";
+  import.meta.env.VITE_API_BASE ||
+  `${window.location.protocol}//${window.location.hostname}:5050`;
 
 const handleResponse = async (response: Response) => {
   if (!response.ok) {
