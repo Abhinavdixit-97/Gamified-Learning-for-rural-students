@@ -61,8 +61,8 @@ const TeacherGrowthPanel = ({ attempts }: TeacherGrowthPanelProps) => {
       {
         label: "Accuracy",
         data: trend,
-        borderColor: "#43aa8b",
-        backgroundColor: "rgba(67,170,139,0.2)",
+        borderColor: "#2FA4D7",
+        backgroundColor: "rgba(47, 164, 215, 0.2)",
         tension: 0.35,
         pointRadius: 4
       }

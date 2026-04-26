@@ -1,0 +1,34 @@
+.video-upload-modal {
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.file-upload-area {
+  margin: 1rem 0;
+}
+
+.file-upload-label {
+  display: block;
+  padding: 2rem;
+  border: 2px dashed #2FA4D7;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(47, 164, 215, 0.05);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.file-upload-label:hover {
+  background: rgba(47, 164, 215, 0.1);
+  border-color: #E76F2E;
+}
+
+.video-preview {
+  margin: 1rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

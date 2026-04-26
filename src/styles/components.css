@@ -28,8 +28,8 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: linear-gradient(140deg, var(--sun), var(--sky));
-  box-shadow: 0 6px 16px rgba(249, 199, 79, 0.35);
+  background: linear-gradient(140deg, var(--accent), var(--primary));
+  box-shadow: 0 6px 16px rgba(231, 111, 46, 0.35);
 }
 
 .nav-links {
@@ -49,7 +49,7 @@
 .nav-link.active,
 .nav-link:hover {
   color: var(--ink);
-  background: rgba(76, 201, 240, 0.2);
+  background: rgba(47, 164, 215, 0.2);
 }
 
 .nav-actions {
@@ -85,7 +85,7 @@
 }
 
 .hero-card {
-  background: linear-gradient(140deg, rgba(110, 211, 255, 0.2), rgba(255, 209, 102, 0.25));
+  background: linear-gradient(140deg, rgba(47, 164, 215, 0.15), rgba(245, 233, 216, 0.4));
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   display: grid;
@@ -108,13 +108,13 @@
 }
 
 .btn-primary {
-  background: linear-gradient(140deg, var(--melon), var(--sun));
-  color: #1f1300;
-  box-shadow: 0 12px 24px rgba(243, 114, 44, 0.3);
+  background: linear-gradient(140deg, var(--accent), #f59e42);
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(231, 111, 46, 0.3);
 }
 
 .btn-secondary {
-  background: rgba(110, 211, 255, 0.25);
+  background: rgba(47, 164, 215, 0.2);
   color: var(--ink);
 }
 
@@ -141,7 +141,7 @@
 }
 
 .sub-card {
-  background: rgba(249, 199, 79, 0.18);
+  background: rgba(245, 233, 216, 0.5);
   padding: 1rem;
   border-radius: var(--radius-md);
   margin: 1rem 0;
@@ -196,8 +196,8 @@ textarea.input {
 }
 
 .stat-pill {
-  background: rgba(67, 170, 139, 0.15);
-  color: var(--leaf);
+  background: rgba(47, 164, 215, 0.15);
+  color: var(--primary);
   padding: 0.5rem 0.9rem;
   border-radius: 999px;
   font-weight: 700;
@@ -206,8 +206,8 @@ textarea.input {
 .callout {
   padding: 1.5rem;
   border-radius: var(--radius-md);
-  background: rgba(249, 199, 79, 0.2);
-  border: 1px dashed rgba(249, 199, 79, 0.8);
+  background: rgba(245, 233, 216, 0.5);
+  border: 1px dashed rgba(231, 111, 46, 0.4);
 }
 
 .tutor-panel {
@@ -245,7 +245,7 @@ textarea.input {
 }
 
 .quiz-card {
-  background: rgba(76, 201, 240, 0.12);
+  background: rgba(47, 164, 215, 0.1);
   padding: 1.2rem;
   border-radius: var(--radius-md);
 }
@@ -264,8 +264,8 @@ textarea.input {
 }
 
 .option-btn.selected {
-  background: rgba(67, 170, 139, 0.2);
-  border-color: rgba(67, 170, 139, 0.5);
+  background: rgba(47, 164, 215, 0.2);
+  border-color: rgba(47, 164, 215, 0.5);
 }
 
 .progress-meter {
@@ -285,7 +285,7 @@ textarea.input {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--leaf), var(--sky));
+  background: linear-gradient(90deg, var(--primary), var(--accent));
 }
 
 .chat-box {
@@ -309,12 +309,12 @@ textarea.input {
   display: inline-block;
   padding: 0.55rem 0.8rem;
   border-radius: 14px;
-  background: rgba(76, 201, 240, 0.2);
+  background: rgba(47, 164, 215, 0.15);
   max-width: 90%;
 }
 
 .chat-message.user .chat-bubble {
-  background: rgba(249, 199, 79, 0.3);
+  background: rgba(245, 233, 216, 0.6);
 }
 
 .chart-card {
@@ -347,7 +347,7 @@ textarea.input {
 }
 
 .tag {
-  background: rgba(76, 201, 240, 0.18);
+  background: rgba(47, 164, 215, 0.15);
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
   font-size: 0.85rem;
@@ -409,8 +409,8 @@ textarea.input {
 }
 
 .subject-tab.active {
-  background: rgba(76, 201, 240, 0.18);
-  border-color: rgba(76, 201, 240, 0.6);
+  background: rgba(47, 164, 215, 0.2);
+  border-color: rgba(47, 164, 215, 0.6);
 }
 
 .global-ai-launcher {
@@ -487,8 +487,8 @@ textarea.input {
 }
 
 .login-hints span {
-  background: rgba(110, 211, 255, 0.22);
-  border: 1px solid rgba(76, 201, 240, 0.28);
+  background: rgba(47, 164, 215, 0.15);
+  border: 1px solid rgba(47, 164, 215, 0.3);
   border-radius: 999px;
   padding: 0.4rem 0.7rem;
   font-weight: 700;
@@ -501,8 +501,8 @@ textarea.input {
   gap: 1.5rem;
   align-items: center;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(238, 247, 255, 0.9)),
-    linear-gradient(90deg, rgba(255, 209, 102, 0.22), rgba(123, 211, 137, 0.18));
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(245, 233, 216, 0.6)),
+    linear-gradient(90deg, rgba(47, 164, 215, 0.15), rgba(231, 111, 46, 0.1));
   border: 1px solid rgba(31, 41, 51, 0.08);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
@@ -523,7 +523,7 @@ textarea.input {
   text-align: center;
   background:
     radial-gradient(circle at center, #fff 0 58%, transparent 59%),
-    conic-gradient(var(--leaf) var(--progress), rgba(31, 41, 51, 0.08) 0);
+    conic-gradient(var(--primary) var(--progress), rgba(31, 41, 51, 0.08) 0);
   box-shadow: inset 0 0 0 1px rgba(31, 41, 51, 0.08), 0 14px 28px rgba(31, 41, 51, 0.12);
 }
 
@@ -603,11 +603,11 @@ textarea.input {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--berry);
+  background: var(--accent);
 }
 
 .status-dot.success {
-  background: var(--leaf);
+  background: var(--primary);
 }
 
 .chapter-mission-grid {
@@ -634,7 +634,7 @@ textarea.input {
 .chapter-mission:hover,
 .chapter-mission.active {
   transform: translateY(-3px);
-  border-color: rgba(76, 201, 240, 0.75);
+  border-color: rgba(47, 164, 215, 0.75);
   box-shadow: 0 18px 34px rgba(31, 41, 51, 0.14);
 }
 
@@ -671,7 +671,7 @@ textarea.input {
 }
 
 .quiz-stage-header > strong {
-  color: var(--leaf);
+  color: var(--primary);
   font-size: 1.35rem;
 }
 
@@ -698,34 +698,34 @@ textarea.input {
   width: 34px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: rgba(110, 211, 255, 0.24);
+  background: rgba(47, 164, 215, 0.2);
 }
 
 .option-btn.correct {
-  border-color: rgba(67, 170, 139, 0.8);
-  background: rgba(123, 211, 137, 0.2);
+  border-color: rgba(47, 164, 215, 0.8);
+  background: rgba(47, 164, 215, 0.15);
 }
 
 .option-btn.wrong {
-  border-color: rgba(255, 143, 171, 0.8);
-  background: rgba(255, 143, 171, 0.18);
+  border-color: rgba(231, 111, 46, 0.8);
+  background: rgba(231, 111, 46, 0.15);
 }
 
 .quiz-feedback,
 .ai-explanation {
   border-radius: var(--radius-md);
   padding: 0.85rem 1rem;
-  background: rgba(255, 143, 171, 0.14);
+  background: rgba(231, 111, 46, 0.12);
   color: var(--ink);
   font-weight: 700;
 }
 
 .quiz-feedback.success {
-  background: rgba(123, 211, 137, 0.2);
+  background: rgba(47, 164, 215, 0.15);
 }
 
 .ai-explanation {
-  background: rgba(110, 211, 255, 0.16);
+  background: rgba(47, 164, 215, 0.1);
   font-weight: 600;
   white-space: pre-wrap;
 }
